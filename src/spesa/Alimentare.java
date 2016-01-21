@@ -1,4 +1,4 @@
-package eredit;
+package spesa;
 
 class Alimentare extends Prodotto {
 

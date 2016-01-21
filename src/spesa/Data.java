@@ -1,4 +1,4 @@
-package eredit;
+package spesa;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

@@ -1,4 +1,4 @@
-package eredit;
+package spesa;
 
 public class Prodotto {
 	protected String cod = new String();
