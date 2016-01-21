@@ -7,9 +7,10 @@ public class Negozio {
 
 	public static ListaSpesa ls = new ListaSpesa();
 
-	private static Prodotto[] inventario = { new Alimentare("4134", "Una Mela", 0.15, new Data(22, 1, 2016)),
-			new Alimentare("4634", "Una Pera", 0.20, new Data(26, 1, 2016)),
-			new Alimentare("4164", "Una Banana", 0.35, new Data(10, 1, 2016)) };
+	public static Prodotto[] inventario = {
+			new Alimentare("4134", "Mela", 0.15, new Data(22, 1, 2016)),
+			new Alimentare("4634", "Pera", 0.20, new Data(26, 1, 2016)),
+			new Alimentare("4164", "Banana", 0.35, new Data(10, 1, 2016)) };
 
 	public static void main(String args[]) {
 		InputStreamReader isr = new InputStreamReader(System.in);
@@ -42,7 +43,7 @@ public class Negozio {
 		ls.calcolaTotale();
 	}
 
-	private static void stampaProdotti() {
+	public static void stampaProdotti() {
 		for (int i = 0; i < inventario.length; i++) {
 			System.out.println(i + " - " + inventario[i].getDescr() + " prezzo: " + inventario[i].getPrezzo());
 		}
