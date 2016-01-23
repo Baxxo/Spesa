@@ -10,8 +10,10 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.widgets.DateTime;
 
 public class Spesagrafica {
 
@@ -39,9 +41,6 @@ public class Spesagrafica {
 	private Text text;
 	private Text text_1;
 	private Text text_2;
-	private Text text_3;
-	private Text text_4;
-	private Text text_5;
 	private Text text_6;
 	private Text text_7;
 
@@ -126,7 +125,8 @@ public class Spesagrafica {
 		list.setBounds(30, 102, 283, 301);
 
 		list_1 = new List(shell, SWT.BORDER);
-		list_1.setBounds(418, 102, 289, 301);
+		list_1.setBounds(410, 102, 289, 301);	
+		//list_1.setVisible(false);
 
 		Label lblTotale = new Label(shell, SWT.NONE);
 		lblTotale.setBounds(270, 482, 43, 15);
@@ -188,6 +188,10 @@ public class Spesagrafica {
 		});
 		btnElimina.setBounds(123, 458, 75, 25);
 		btnElimina.setText("ELIMINA");
+		
+		DateTime dateTime = new DateTime(shell, SWT.BORDER);
+		dateTime.setBounds(492, 275, 80, 24);
+		dateTime.setVisible(false);
 
 		Button btnEliminaProdotto = new Button(shell, SWT.NONE);
 		btnEliminaProdotto.setBounds(418, 419, 128, 25);
@@ -233,33 +237,6 @@ public class Spesagrafica {
 		lblScadenza.setText("Scadenza:");
 		lblScadenza.setVisible(false);
 
-		text_3 = new Text(shell, SWT.BORDER);
-		text_3.setBounds(492, 296, 53, 21);
-		text_3.setVisible(false);
-
-		text_4 = new Text(shell, SWT.BORDER);
-		text_4.setBounds(551, 296, 58, 21);
-		text_4.setVisible(false);
-
-		text_5 = new Text(shell, SWT.BORDER);
-		text_5.setBounds(611, 296, 51, 21);
-		text_5.setVisible(false);
-
-		Label lblYyyy = new Label(shell, SWT.NONE);
-		lblYyyy.setBounds(611, 275, 34, 15);
-		lblYyyy.setText("YYYY");
-		lblYyyy.setVisible(false);
-
-		Label lblGg = new Label(shell, SWT.NONE);
-		lblGg.setBounds(505, 275, 21, 15);
-		lblGg.setText("GG");
-		lblGg.setVisible(false);
-
-		Label lblMm = new Label(shell, SWT.NONE);
-		lblMm.setText("MM");
-		lblMm.setBounds(560, 275, 21, 15);
-		lblMm.setVisible(false);
-
 		Label lblMateriale = new Label(shell, SWT.NONE);
 		lblMateriale.setBounds(429, 337, 55, 15);
 		lblMateriale.setText("Materiale:");
@@ -272,6 +249,9 @@ public class Spesagrafica {
 		text_7 = new Text(shell, SWT.BORDER);
 		text_7.setBounds(348, 479, 76, 21);
 		text_7.setVisible(false);
+		text.setVisible(true);
+		text_1.setVisible(true);
+		text_2.setVisible(true);
 
 		Button btnAlimentare = new Button(shell, SWT.RADIO);
 		btnAlimentare.addMouseListener(new MouseAdapter() {
@@ -285,17 +265,9 @@ public class Spesagrafica {
 					lblPrezzo.setVisible(true);
 					lblDescrizione.setVisible(true);
 					lblScadenza.setVisible(true);
-					lblGg.setVisible(true);
-					lblMm.setVisible(true);
-					lblYyyy.setVisible(true);
-					text.setVisible(true);
-					text_1.setVisible(true);
-					text_2.setVisible(true);
-					text_3.setVisible(true);
-					text_4.setVisible(true);
-					text_5.setVisible(true);
 					lblMateriale.setVisible(false);
 					text_6.setVisible(false);
+					dateTime.setVisible(true);
 					isAlimentare = true;
 				}
 				// System.out.print(isAlimentare);
@@ -321,13 +293,8 @@ public class Spesagrafica {
 					text_1.setVisible(true);
 					text_2.setVisible(true);
 					text_6.setVisible(true);
+					dateTime.setVisible(false);
 					lblScadenza.setVisible(false);
-					lblGg.setVisible(false);
-					lblMm.setVisible(false);
-					lblYyyy.setVisible(false);
-					text_3.setVisible(false);
-					text_4.setVisible(false);
-					text_5.setVisible(false);
 					isAlimentare = false;
 				}
 				// System.out.print(isAlimentare);
@@ -367,9 +334,9 @@ public class Spesagrafica {
 						cod = text.getText();
 						prezzo = Double.parseDouble(text_1.getText());
 						descr = text_2.getText();
-						g = Integer.parseInt(text_3.getText());
-						m = Integer.parseInt(text_4.getText());
-						y = Integer.parseInt(text_5.getText());
+						g = dateTime.getDay();
+						m = dateTime.getMonth();
+						y = dateTime.getYear();
 						scadenza = new Data(g, m, y);
 						n.inventario[j] = new Alimentare(cod, descr, prezzo, scadenza);
 					} else {
@@ -391,6 +358,8 @@ public class Spesagrafica {
 		btnInserisciProdotto.setBounds(571, 419, 128, 25);
 		btnInserisciProdotto.setText("NUOVO PRODOTTO");
 		btnInserisciProdotto.setVisible(false);
+		
+		
 		
 
 		stampa();
