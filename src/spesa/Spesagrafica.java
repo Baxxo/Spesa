@@ -75,14 +75,14 @@ public class Spesagrafica {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		
+
 		newAlimentare = new Alimentare("4134", "Mela", 1, new Data(22, 1, 2016));
 		n.inventario[0] = newAlimentare;
 		j++;
 		newAlimentare = new Alimentare("4634", "Pera", 2, new Data(26, 1, 2016));
-		n.inventario[1] =  newAlimentare;
+		n.inventario[1] = newAlimentare;
 		j++;
-		newAlimentare = new Alimentare("4164", "Banana", 3, new Data(10, 1, 2016)); 
+		newAlimentare = new Alimentare("4164", "Banana", 3, new Data(10, 1, 2016));
 		n.inventario[2] = newAlimentare;
 		j++;
 
@@ -293,8 +293,7 @@ public class Spesagrafica {
 
 			@Override
 			public void mouseUp(MouseEvent e) {
-				if(j<100){
-					j++;
+				if (j < 100) {
 					if (isAlimentare == true) {
 						cod = text.getText();
 						prezzo = Double.parseDouble(text_1.getText());
@@ -303,29 +302,23 @@ public class Spesagrafica {
 						m = Integer.parseInt(text_4.getText());
 						y = Integer.parseInt(text_5.getText());
 						scadenza = new Data(g, m, y);
-						System.out.println(cod + " " + descr + " " + prezzo + " " + scadenza);
-						newAlimentare = new Alimentare(cod, descr, prezzo, scadenza);
-						n.inventario[j] = (newAlimentare);
-						System.out.println(n.inventario[j]);
+						n.inventario[j] = new Alimentare(cod, descr, prezzo, scadenza);
 					} else {
 						cod = text.getText();
 						prezzo = Double.parseDouble(text_1.getText());
 						descr = text_2.getText();
 						materiale = text_6.getText();
-						System.out.println(cod + " " + descr + " " + prezzo + " " + materiale);
-						newNonAlimentare = new NonAlimentare(cod, descr, prezzo, materiale);
-						n.inventario[j] = (newNonAlimentare);
-						System.out.println(n.inventario[j]);
+						n.inventario[j] = new NonAlimentare(cod, descr, prezzo, materiale);
 					}
-				}else{
+				} else {
 					System.out.println("elimina qualche prodotto");
 				}
-				
+				j++;
 
 			}
 
 		});
-		btnInserisciProdotto.setBounds(481, 477, 128, 25);
+		btnInserisciProdotto.setBounds(596, 17, 128, 25);
 		btnInserisciProdotto.setText("NUOVO PRODOTTO");
 
 		Button btnRistampa = new Button(shell, SWT.NONE);
@@ -337,6 +330,10 @@ public class Spesagrafica {
 		});
 		btnRistampa.setBounds(28, 66, 75, 25);
 		btnRistampa.setText("RISTAMPA");
+		
+		Button btnEliminaProdotto = new Button(shell, SWT.NONE);
+		btnEliminaProdotto.setBounds(453, 17, 128, 25);
+		btnEliminaProdotto.setText("ELIMINA PRODOTTO");
 
 		stampa();
 
