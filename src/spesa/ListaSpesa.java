@@ -14,11 +14,19 @@ public class ListaSpesa {
 		carrello.add(p);
 	}
 
-	public double calcolaTotale() {
-
+	public double calcolaTotale(boolean Tessera) {
 		double tot = 0;
-		for (int i = 0; i < carrello.size(); i++) {
-			tot += carrello.get(i).getPrezzo();
+		if(Tessera == false){
+			for (int i = 0; i < carrello.size(); i++) {
+				tot += carrello.get(i).getPrezzo();
+			}			
+		}else{
+			for (int i = 0; i < carrello.size(); i++) {
+				if(carrello.get(i) instanceof Alimentare){
+					
+				}
+				//tot += carrello.get(i).getPrezzo();
+			}
 		}
 		System.out.println("Prezzo: " + tot);
 		return tot;
