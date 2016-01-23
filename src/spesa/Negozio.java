@@ -2,35 +2,38 @@ package spesa;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Negozio {
 
 	public static ListaSpesa ls = new ListaSpesa();
+	// public static Spesagrafica sg = new Spesagrafica();
 
-	public static Prodotto[] inventario = {
-			new Alimentare("4134", "Mela", 0.15, new Data(22, 1, 2016)),
-			new Alimentare("4634", "Pera", 0.20, new Data(26, 1, 2016)),
-			new Alimentare("4164", "Banana", 0.35, new Data(10, 1, 2016)) };
+	public static Prodotto[] inventario = new Prodotto[100];
 
 	public static void main(String args[]) {
+		/*
 		InputStreamReader isr = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
 		int sel = 0;
 		int elimina;
-		
+
 		while (sel != 99) {
 			if (sel == 98) {
+
 				stampaProdotti();
+
 				System.out.println("98 - per eliminare");
 				System.out.println("99 - per uscire");
 				System.out.println("ins numero prodotto: ");
+
 				elimina = ls.leggiInt(br);
 				ls.eliminaProdotto(elimina);
 			}
+
 			
-			stampaProdotti();
-			System.out.println("98 - per eliminare");
-			System.out.println("99 - per uscire");
+			  stampaProdotti(); System.out.println("98 - per eliminare");
+			  System.out.println("99 - per uscire");
 			sel = ls.leggiInt(br);
 			if (sel != 99 && sel >= 0 && sel < inventario.length) {
 				ls.aggiungiProdotto(inventario[sel]);
@@ -38,9 +41,9 @@ public class Negozio {
 				System.out.print("");
 			}
 
-	
 		}
-		ls.calcolaTotale();
+		ls.calcolaTotale();*/
+
 	}
 
 	public static void stampaProdotti() {
@@ -50,24 +53,3 @@ public class Negozio {
 	}
 
 }
-
-/*
- * 
- * String c = new String(); String d = new String(); String f = new String();
- * String pre = new String(); Double pr; Boolean tessera; InputStreamReader i =
- * new InputStreamReader(System.in); BufferedReader br = new BufferedReader(i);
- * 
- * 
- * System.out.print("ins codice: "); try { c = br.readLine(); } catch
- * (IOException e) { e.printStackTrace(); }
- * 
- * System.out.print("ins descrizione: "); try { d = br.readLine(); } catch
- * (IOException e) { e.printStackTrace(); }
- * 
- * System.out.print("ins prezzo: "); try { pre = br.readLine(); } catch
- * (IOException e) { e.printStackTrace(); } pr = Double.parseDouble(pre);
- * 
- * System.out.print("tessera?[0/1]: "); try { f = br.readLine(); } catch
- * (IOException e) { e.printStackTrace(); } tessera = Boolean.parseBoolean(f);
- * Prodotto p = new Prodotto(c, d, pr); System.out.println(p.toString());
- */
