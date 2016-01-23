@@ -28,7 +28,7 @@ public class ListaSpesa {
 		carrello.remove(index);
 	}
 
-	private static List<Prodotto> carrello = new ArrayList<Prodotto>();
+	public List<Prodotto> carrello = new ArrayList<Prodotto>();
 
 	public String leggiStringa(BufferedReader br) {
 		try {
