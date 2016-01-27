@@ -9,6 +9,10 @@ public class NonAlimentare extends Prodotto {
 		this.materiale = materiale;
 	}
 
+	public NonAlimentare() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void applicaSconto() {
 		if (materiale.equals("carta") || materiale.equals("vetro") || materiale.equals("plastica"))

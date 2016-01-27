@@ -9,6 +9,10 @@ class Alimentare extends Prodotto {
 		this.scadenza = scadenza;
 	}
 
+	public Alimentare() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void applicaSconto(Data oggi) {
 		if (scadenza.getDifference(oggi) > 10) {
 			prezzo -= prezzo / 100 * 20;

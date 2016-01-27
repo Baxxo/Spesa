@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListaSpesa {
+	
+	Alimentare a = new Alimentare();
+	NonAlimentare n = new NonAlimentare();
 
 	public ListaSpesa() {
 	}
@@ -23,7 +26,9 @@ public class ListaSpesa {
 		}else{
 			for (int i = 0; i < carrello.size(); i++) {
 				if(carrello.get(i) instanceof Alimentare){
-					
+					a.applicaSconto();
+				}else{
+					n.applicaSconto();
 				}
 				//tot += carrello.get(i).getPrezzo();
 			}
