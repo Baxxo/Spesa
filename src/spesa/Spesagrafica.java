@@ -10,7 +10,6 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.DateTime;
@@ -20,24 +19,24 @@ public class Spesagrafica {
 	protected Shell shell;
 
 	Negozio n = new Negozio();
-	public int l = n.inventario.length;
-	public int j = 0;
-	public int g;
-	public int m;
-	public int y;
-	public boolean isAlimentare;
-	public boolean isScontrino = false;
-	public boolean isTessera = false;
-	public double prezzo;
-	public String textBox;
-	public String tot;
-	public String cod;
-	public String descr;
-	public String materiale;
-	public String pr;
-	public Data scadenza;
-	public Alimentare newAlimentare;
-	public NonAlimentare newNonAlimentare;
+	private int l = n.inventario.length;
+	private int j = 0;
+	private int g;
+	private int m;
+	private int y;
+	private boolean isAlimentare;
+	private boolean isScontrino = false;
+	private boolean isTessera = false;
+	private double prezzo;
+	private String textBox;
+	private String tot;
+	private String cod;
+	private String descr;
+	private String materiale;
+	private String pr;
+	private Data scadenza;
+	private Alimentare newAlimentare;
+	private NonAlimentare newNonAlimentare;
 	private List list;
 	private List list_1;
 	private Text text;
@@ -56,6 +55,17 @@ public class Spesagrafica {
 	private Button btnAlimentare;
 	private Button btnNonAlimentare;
 	private Button btnProdotto;
+	private Label lblProdotti;
+	private Label lblNegozio;
+	private Label lblTotale;
+	private Label lblCod;
+	private Label lblPrezzo;
+	private Label lblDescrizione;
+	private Label lblScadenza;
+	private Label lblMateriale;
+	private Label lblPrezzo_1;
+	private Label lblCarrello;
+	private DateTime dateTime;
 
 	/**
 	 * Launch the application.
@@ -92,6 +102,13 @@ public class Spesagrafica {
 		btnAlimentare.setVisible(false);
 		btnNonAlimentare.setVisible(false);
 		btnInserisciProdotto.setVisible(false);
+		btnScontrino.setVisible(true);
+		lblCod.setVisible(false);
+		lblDescrizione.setVisible(false);
+		lblMateriale.setVisible(false);
+		lblPrezzo.setVisible(false);
+		lblScadenza.setVisible(false);
+		dateTime.setVisible(false);
 		stampa();
 		stampa1();
 	}
@@ -124,52 +141,58 @@ public class Spesagrafica {
 		shell.setSize(750, 550);
 		shell.setText("SWT Application");
 
-		DateTime dateTime = new DateTime(shell, SWT.BORDER);
+		dateTime = new DateTime(shell, SWT.BORDER);
 		dateTime.setBounds(492, 275, 80, 24);
 		dateTime.setVisible(false);
 
-		Label lblNegozio = new Label(shell, SWT.NONE);
+		lblNegozio = new Label(shell, SWT.NONE);
 		lblNegozio.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.BOLD));
 		lblNegozio.setBounds(308, 10, 97, 30);
 		lblNegozio.setText("NEGOZIO");
 
-		Label lblProdotti = new Label(shell, SWT.NONE);
-		lblProdotti.setBounds(136, 66, 62, 15);
+		lblProdotti = new Label(shell, SWT.CENTER);
+		lblProdotti.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblProdotti.setBounds(112, 67, 62, 15);
 		lblProdotti.setText("PRODOTTI");
 
-		Label lblTotale = new Label(shell, SWT.NONE);
+		lblTotale = new Label(shell, SWT.NONE);
 		lblTotale.setBounds(270, 482, 43, 15);
 		lblTotale.setText("TOTALE");
 		lblTotale.setVisible(false);
 
-		Label lblCod = new Label(shell, SWT.NONE);
+		lblCod = new Label(shell, SWT.NONE);
 		lblCod.setBounds(443, 144, 43, 15);
 		lblCod.setText("Codice:");
 		lblCod.setVisible(false);
 
-		Label lblPrezzo = new Label(shell, SWT.NONE);
+		lblPrezzo = new Label(shell, SWT.NONE);
 		lblPrezzo.setBounds(443, 189, 43, 15);
 		lblPrezzo.setText("Prezzo:");
 		lblPrezzo.setVisible(false);
 
-		Label lblDescrizione = new Label(shell, SWT.NONE);
+		lblDescrizione = new Label(shell, SWT.NONE);
 		lblDescrizione.setBounds(418, 235, 68, 15);
 		lblDescrizione.setText("Descrizione:");
 		lblDescrizione.setVisible(false);
 
-		Label lblScadenza = new Label(shell, SWT.NONE);
+		lblScadenza = new Label(shell, SWT.NONE);
 		lblScadenza.setBounds(431, 275, 55, 15);
 		lblScadenza.setText("Scadenza:");
 		lblScadenza.setVisible(false);
 
-		Label lblMateriale = new Label(shell, SWT.NONE);
+		lblMateriale = new Label(shell, SWT.NONE);
 		lblMateriale.setBounds(431, 278, 55, 15);
 		lblMateriale.setText("Materiale:");
 		lblMateriale.setVisible(false);
 
-		Label lblPrezzo_1 = new Label(shell, SWT.NONE);
+		lblPrezzo_1 = new Label(shell, SWT.NONE);
 		lblPrezzo_1.setBounds(299, 106, 43, 15);
 		lblPrezzo_1.setText("Prezzo:");
+
+		lblCarrello = new Label(shell, SWT.NONE);
+		lblCarrello.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblCarrello.setBounds(539, 67, 70, 15);
+		lblCarrello.setText("CARRELLO");
 
 		list = new List(shell, SWT.BORDER);
 		list.addMouseListener(new MouseAdapter() {
@@ -234,7 +257,7 @@ public class Spesagrafica {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				list_1.setVisible(true);
-				isScontrino = true;
+				setScontrino(true);
 				btnTessera.setVisible(true);
 			}
 		});
@@ -305,6 +328,7 @@ public class Spesagrafica {
 				list_1.setVisible(false);
 				btnInserisciProdotto.setVisible(true);
 				if (btnAlimentare.getSelection() == true) {
+					isAlimentare = true;
 					text.setVisible(true);
 					text_1.setVisible(true);
 					text_2.setVisible(true);
@@ -312,11 +336,10 @@ public class Spesagrafica {
 					lblPrezzo.setVisible(true);
 					lblDescrizione.setVisible(true);
 					lblScadenza.setVisible(true);
-					lblMateriale.setVisible(false);
-					text_6.setVisible(false);
 					dateTime.setVisible(true);
+					text_6.setVisible(false);
 					btnElimina.setVisible(false);
-					isAlimentare = true;
+					lblMateriale.setVisible(false);
 				}
 			}
 		});
@@ -331,21 +354,19 @@ public class Spesagrafica {
 				list_1.setVisible(false);
 				btnInserisciProdotto.setVisible(true);
 				if (btnNonAlimentare.getSelection() == true) {
+					isAlimentare = false;
 					text.setVisible(true);
 					text_1.setVisible(true);
 					text_2.setVisible(true);
+					text.setVisible(true);
+					text_6.setVisible(true);
 					lblCod.setVisible(true);
 					lblPrezzo.setVisible(true);
-					lblDescrizione.setVisible(true);
 					lblMateriale.setVisible(true);
-					text.setVisible(true);
-					text_1.setVisible(true);
-					text_2.setVisible(true);
-					text_6.setVisible(true);
+					lblDescrizione.setVisible(true);
 					dateTime.setVisible(false);
-					lblScadenza.setVisible(false);
 					btnElimina.setVisible(false);
-					isAlimentare = false;
+					lblScadenza.setVisible(false);
 				}
 			}
 		});
@@ -365,6 +386,19 @@ public class Spesagrafica {
 				text.setVisible(false);
 				text_1.setVisible(false);
 				text_2.setVisible(false);
+				lblCod.setVisible(false);
+				lblDescrizione.setVisible(false);
+				lblMateriale.setVisible(false);
+				lblScadenza.setVisible(false);
+				lblPrezzo.setVisible(false);
+				lblCarrello.setVisible(false);
+				dateTime.setVisible(false);
+				text_6.setVisible(false);
+				btnInserisciProdotto.setVisible(false);
+				text.setText("");
+				text_1.setText("");
+				text_2.setText("");
+				text_6.setText("");
 			}
 		});
 		btnProdotto.setBounds(534, 15, 75, 25);
@@ -374,11 +408,10 @@ public class Spesagrafica {
 		btnRistampa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				btnScontrino.setVisible(true);
 				ristampa();
 			}
 		});
-		btnRistampa.setBounds(28, 66, 75, 25);
+		btnRistampa.setBounds(76, 17, 75, 25);
 		btnRistampa.setText("RISTAMPA");
 
 		btnInserisciProdotto.addMouseListener(new MouseAdapter() {
@@ -415,7 +448,7 @@ public class Spesagrafica {
 		btnInserisciProdotto.setBounds(555, 361, 128, 25);
 		btnInserisciProdotto.setText("NUOVO PRODOTTO");
 		btnInserisciProdotto.setVisible(false);
-
+		
 		stampa();
 
 	}
@@ -432,5 +465,21 @@ public class Spesagrafica {
 		for (int i = 0; i < n.ls.carrello.size(); i++) {
 			list_1.add(n.ls.carrello.get(i).getDescr());
 		}
+	}
+
+	public String getTextBox() {
+		return textBox;
+	}
+
+	public void setTextBox(String textBox) {
+		this.textBox = textBox;
+	}
+
+	public boolean isScontrino() {
+		return isScontrino;
+	}
+
+	public void setScontrino(boolean isScontrino) {
+		this.isScontrino = isScontrino;
 	}
 }
