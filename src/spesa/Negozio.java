@@ -1,12 +1,8 @@
 package spesa;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-
 public class Negozio {
 
-	public static ListaSpesa ls = new ListaSpesa();
+	public ListaSpesa ls = new ListaSpesa();
 
 	public static Prodotto[] inventario = new Prodotto[100];
 
