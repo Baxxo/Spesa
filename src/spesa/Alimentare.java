@@ -13,9 +13,11 @@ class Alimentare extends Prodotto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void applicaSconto(Data oggi) {
+	public void applicaSconto(Data oggi){
+		System.out.println("oggi: "+oggi);
 		if (scadenza.getDifference(oggi) > 10) {
 			prezzo -= prezzo / 100 * 20;
+			System.out.println(prezzo);
 		}
 	}
 }

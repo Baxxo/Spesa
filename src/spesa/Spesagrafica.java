@@ -135,15 +135,17 @@ public class Spesagrafica {
 		list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				text_3.setText("");;
+				text_3.setText("");
+				;
 				list_1.setVisible(true);
 				stampa1();
-				pr =""+ n.inventario[list.getSelectionIndex()].getPrezzo();
+				pr = "" + n.inventario[list.getSelectionIndex()].getPrezzo();
 				text_3.setText(pr);
 				btnElimina.setVisible(true);
 				// System.out.println("prodtto sel: " +
 				// n.inventario[list.getSelectionIndex()]);
 			}
+
 			@Override
 			public void mouseDoubleClick(MouseEvent e) {
 				n.ls.aggiungiProdotto(n.inventario[list.getSelectionIndex()]);
@@ -155,7 +157,7 @@ public class Spesagrafica {
 		list_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
-				pr =""+ n.inventario[list_1.getSelectionIndex()].getPrezzo();
+				pr = "" + n.inventario[list_1.getSelectionIndex()].getPrezzo();
 				text_3.setText(pr);
 			}
 		});
@@ -191,6 +193,8 @@ public class Spesagrafica {
 				lblTotale.setVisible(true);
 				tot = "" + n.ls.calcolaTotale(isTessera);
 				text_7.setText(tot);
+				n.ls.tot = 0;
+
 			}
 		});
 		btnCassa.setBounds(632, 477, 75, 25);
@@ -231,7 +235,7 @@ public class Spesagrafica {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				int sel = list.getSelectionIndex();
-				//System.out.println(sel);
+				// System.out.println(sel);
 				for (int i = sel; i < j; i++) {
 					n.inventario[i] = n.inventario[i++];
 				}
@@ -298,7 +302,6 @@ public class Spesagrafica {
 		text_3 = new Text(shell, SWT.BORDER);
 		text_3.setBounds(348, 103, 37, 21);
 
-
 		btnAlimentare = new Button(shell, SWT.RADIO);
 		btnAlimentare.addMouseListener(new MouseAdapter() {
 			@Override
@@ -332,7 +335,7 @@ public class Spesagrafica {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				list_1.setVisible(false);
-				//btnElimina.setVisible(true);
+				// btnElimina.setVisible(true);
 				btnInserisciProdotto.setVisible(true);
 				if (btnNonAlimentare.getSelection() == true) {
 					text.setVisible(true);
@@ -374,7 +377,7 @@ public class Spesagrafica {
 		});
 		btnProdotto.setBounds(534, 15, 75, 25);
 		btnProdotto.setText("PRODOTTO");
-		
+
 		btnRistampa = new Button(shell, SWT.NONE);
 		btnRistampa.addMouseListener(new MouseAdapter() {
 			@Override
@@ -424,6 +427,23 @@ public class Spesagrafica {
 		Label lblPrezzo_1 = new Label(shell, SWT.NONE);
 		lblPrezzo_1.setBounds(299, 106, 43, 15);
 		lblPrezzo_1.setText("Prezzo:");
+
+		Button btnPulisci = new Button(shell, SWT.NONE);
+		btnPulisci.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				list_1.removeAll();
+				n.ls.tot = 0;
+				for (int i = 0; i < n.ls.carrello.size(); i++) {
+					n.ls.carrello.set(i, null);
+				} /*
+					 * for(int i=0;i<n.ls.carrello.size();i++){
+					 * System.out.println(n.ls.carrello.get(i)); }
+					 */
+			}
+		});
+		btnPulisci.setBounds(90, 10, 75, 25);
+		btnPulisci.setText("PULISCI");
 
 		stampa();
 

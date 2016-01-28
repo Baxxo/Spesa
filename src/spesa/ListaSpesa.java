@@ -9,6 +9,8 @@ public class ListaSpesa {
 	
 	Alimentare a = new Alimentare();
 	NonAlimentare n = new NonAlimentare();
+	Data d;
+	public double tot = 0;
 
 	public ListaSpesa() {
 	}
@@ -18,17 +20,23 @@ public class ListaSpesa {
 	}
 
 	public double calcolaTotale(boolean Tessera) {
-		double tot = 0;
+		//System.out.println(Tessera);
 		if(Tessera == false){
 			for (int i = 0; i < carrello.size(); i++) {
 				tot += carrello.get(i).getPrezzo();
 			}			
 		}else{
+			//System.out.println(Tessera);
 			for (int i = 0; i < carrello.size(); i++) {
-				if(carrello.get(i) instanceof Alimentare){
+				if(carrello.get(i) instanceof Alimentare == true){
+					//System.out.println(carrello.get(i));
+					a = (Alimentare) carrello.get(i);
 					a.applicaSconto();
+					tot = tot + a.getPrezzo();
 				}else{
+					n = (NonAlimentare) carrello.get(i);
 					n.applicaSconto();
+					tot = tot + n.getPrezzo();
 				}
 				//tot += carrello.get(i).getPrezzo();
 			}

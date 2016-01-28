@@ -13,9 +13,10 @@ public class NonAlimentare extends Prodotto {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void applicaSconto() {
-		if (materiale.equals("carta") || materiale.equals("vetro") || materiale.equals("plastica"))
+		if (materiale.equals("carta") || materiale.equals("vetro") || materiale.equals("plastica")) {
 			prezzo -= prezzo / 100 * 10;
+			System.out.println(prezzo);
+		}
 	}
 }
