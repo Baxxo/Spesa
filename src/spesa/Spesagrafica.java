@@ -401,7 +401,7 @@ public class Spesagrafica {
 				text_6.setText("");
 			}
 		});
-		btnProdotto.setBounds(534, 15, 75, 25);
+		btnProdotto.setBounds(587, 17, 75, 25);
 		btnProdotto.setText("PRODOTTO");
 
 		btnRistampa = new Button(shell, SWT.NONE);
@@ -448,6 +448,36 @@ public class Spesagrafica {
 		btnInserisciProdotto.setBounds(555, 361, 128, 25);
 		btnInserisciProdotto.setText("NUOVO PRODOTTO");
 		btnInserisciProdotto.setVisible(false);
+		
+		Button btnScontrino_1 = new Button(shell, SWT.NONE);
+		btnScontrino_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				list_1.setVisible(true);
+				btnElimina.setVisible(true);
+				btnScontrino.setVisible(true);
+				btnAlimentare.setVisible(false);
+				btnNonAlimentare.setVisible(false);
+				text.setVisible(false);
+				text_1.setVisible(false);
+				text_2.setVisible(false);
+				text_6.setVisible(false);
+				lblCod.setVisible(false);
+				lblDescrizione.setVisible(false);
+				lblMateriale.setVisible(false);
+				lblPrezzo.setVisible(false);
+				lblScadenza.setVisible(false);
+				dateTime.setVisible(false);
+				btnInserisciProdotto.setVisible(false);
+			}
+		});
+		btnScontrino_1.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
+		btnScontrino_1.setBounds(466, 17, 75, 25);
+		btnScontrino_1.setText("SCONTRINO");
 		
 		stampa();
 
