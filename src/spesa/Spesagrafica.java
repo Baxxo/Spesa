@@ -145,7 +145,7 @@ public class Spesagrafica {
 		shell.setText("SWT Application");
 
 		dateTime = new DateTime(shell, SWT.BORDER);
-		dateTime.setBounds(492, 275, 80, 24);
+		dateTime.setBounds(843, 275, 80, 24);
 		dateTime.setVisible(false);
 
 		lblNegozio = new Label(shell, SWT.NONE);
@@ -161,37 +161,35 @@ public class Spesagrafica {
 		lblTotale = new Label(shell, SWT.NONE);
 		lblTotale.setBounds(380, 482, 55, 15);
 		lblTotale.setText("TOTALE :");
-		// lblTotale.setVisible(false);
 
 		lblCod = new Label(shell, SWT.NONE);
-		lblCod.setBounds(443, 144, 43, 15);
+		lblCod.setBounds(768, 144, 43, 15);
 		lblCod.setText("Codice:");
 		lblCod.setVisible(false);
 
 		lblPrezzo = new Label(shell, SWT.NONE);
-		lblPrezzo.setBounds(443, 189, 43, 15);
+		lblPrezzo.setBounds(768, 189, 43, 15);
 		lblPrezzo.setText("Prezzo:");
 		lblPrezzo.setVisible(false);
 
 		lblDescrizione = new Label(shell, SWT.NONE);
-		lblDescrizione.setBounds(418, 235, 68, 15);
+		lblDescrizione.setBounds(743, 235, 68, 15);
 		lblDescrizione.setText("Descrizione:");
 		lblDescrizione.setVisible(false);
 
 		lblScadenza = new Label(shell, SWT.NONE);
-		lblScadenza.setBounds(431, 275, 55, 15);
+		lblScadenza.setBounds(756, 275, 55, 15);
 		lblScadenza.setText("Scadenza:");
 		lblScadenza.setVisible(false);
 
 		lblMateriale = new Label(shell, SWT.NONE);
-		lblMateriale.setBounds(431, 278, 55, 15);
+		lblMateriale.setBounds(756, 275, 55, 15);
 		lblMateriale.setText("Materiale:");
 		lblMateriale.setVisible(false);
 
 		lblPrezzo_1 = new Label(shell, SWT.NONE);
 		lblPrezzo_1.setBounds(299, 106, 37, 15);
 		lblPrezzo_1.setText("Prezzo:");
-		lblPrezzo_1.setVisible(false);
 
 		lblCarrello = new Label(shell, SWT.NONE);
 		lblCarrello.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
@@ -460,26 +458,26 @@ public class Spesagrafica {
 		});
 
 		text = new Text(shell, SWT.BORDER);
-		text.setBounds(492, 141, 170, 21);
+		text.setBounds(843, 141, 170, 21);
 		text.setVisible(false);
 
 		text_1 = new Text(shell, SWT.BORDER);
-		text_1.setBounds(492, 186, 170, 21);
+		text_1.setBounds(843, 186, 170, 21);
 		text_1.setVisible(false);
 
 		text_2 = new Text(shell, SWT.BORDER);
-		text_2.setBounds(492, 232, 170, 21);
+		text_2.setBounds(843, 232, 170, 21);
 		text_2.setVisible(false);
 
 		text_6 = new Text(shell, SWT.BORDER);
-		text_6.setBounds(492, 275, 170, 21);
+		text_6.setBounds(843, 275, 170, 21);
 		text_6.setVisible(false);
 
 		btnAlimentare = new Button(shell, SWT.RADIO);
 		btnAlimentare.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				list_1.setVisible(false);
+				//list_1.setVisible(false);
 				btnInserisciProdotto.setVisible(true);
 				if (btnAlimentare.getSelection() == true) {
 					isAlimentare = true;
@@ -492,20 +490,19 @@ public class Spesagrafica {
 					lblScadenza.setVisible(true);
 					dateTime.setVisible(true);
 					text_6.setVisible(false);
-					btnElimina.setVisible(false);
+					//btnElimina.setVisible(false);
 					lblMateriale.setVisible(false);
 				}
 			}
 		});
-		btnAlimentare.setBounds(443, 66, 90, 16);
+		btnAlimentare.setBounds(745, 66, 90, 16);
 		btnAlimentare.setText("Alimentare");
-		btnAlimentare.setVisible(false);
 
 		btnNonAlimentare = new Button(shell, SWT.RADIO);
 		btnNonAlimentare.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				list_1.setVisible(false);
+				//list_1.setVisible(false);
 				btnInserisciProdotto.setVisible(true);
 				if (btnNonAlimentare.getSelection() == true) {
 					isAlimentare = false;
@@ -519,14 +516,13 @@ public class Spesagrafica {
 					lblMateriale.setVisible(true);
 					lblDescrizione.setVisible(true);
 					dateTime.setVisible(false);
-					btnElimina.setVisible(false);
+					//btnElimina.setVisible(false);
 					lblScadenza.setVisible(false);
 				}
 			}
 		});
 		btnNonAlimentare.setText("Non Alimentare");
-		btnNonAlimentare.setBounds(555, 65, 107, 16);
-		btnNonAlimentare.setVisible(false);
+		btnNonAlimentare.setBounds(867, 66, 107, 16);
 
 		btnProdotto = new Button(shell, SWT.NONE);
 		btnProdotto.addMouseTrackListener(new MouseTrackAdapter() {
@@ -544,30 +540,16 @@ public class Spesagrafica {
 		btnProdotto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shell.setSize(1100,550);
 				btnAlimentare.setVisible(true);
 				btnNonAlimentare.setVisible(true);
-				btnElimina.setVisible(false);
-				btnScontrino.setVisible(false);
-				list_1.setVisible(false);
-				text.setVisible(false);
-				text_1.setVisible(false);
-				text_2.setVisible(false);
-				lblCod.setVisible(false);
-				lblDescrizione.setVisible(false);
-				lblMateriale.setVisible(false);
-				lblScadenza.setVisible(false);
-				lblPrezzo.setVisible(false);
-				lblCarrello.setVisible(false);
-				dateTime.setVisible(false);
-				text_6.setVisible(false);
-				btnInserisciProdotto.setVisible(false);
 				text.setText("");
 				text_1.setText("");
 				text_2.setText("");
 				text_6.setText("");
 			}
 		});
-		btnProdotto.setBounds(553, 17, 130, 25);
+		btnProdotto.setBounds(555, 17, 130, 25);
 		btnProdotto.setText("NUOVO PRODOTTO");
 
 		btnRistampa = new Button(shell, SWT.NONE);
@@ -638,7 +620,7 @@ public class Spesagrafica {
 			}
 
 		});
-		btnInserisciProdotto.setBounds(555, 361, 128, 25);
+		btnInserisciProdotto.setBounds(819, 379, 128, 25);
 		btnInserisciProdotto.setText("NUOVO PRODOTTO");
 		btnInserisciProdotto.setVisible(false);
 
