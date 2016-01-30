@@ -27,6 +27,7 @@ public class Spesagrafica {
 	private int m;
 	private int y;
 	private boolean isAlimentare;
+	private boolean isExtended;
 	private boolean isScontrino = false;
 	private boolean isTessera = false;
 	private double prezzo;
@@ -525,6 +526,11 @@ public class Spesagrafica {
 		btnNonAlimentare.setBounds(867, 66, 107, 16);
 
 		btnProdotto = new Button(shell, SWT.NONE);
+		btnProdotto.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
 		btnProdotto.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
 			public void mouseEnter(MouseEvent e) {
@@ -540,13 +546,19 @@ public class Spesagrafica {
 		btnProdotto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				shell.setSize(1100,550);
-				btnAlimentare.setVisible(true);
-				btnNonAlimentare.setVisible(true);
-				text.setText("");
-				text_1.setText("");
-				text_2.setText("");
-				text_6.setText("");
+				if(isExtended == false){
+					isExtended = true;
+					shell.setSize(1100,550);
+					btnAlimentare.setVisible(true);
+					btnNonAlimentare.setVisible(true);
+					text.setText("");
+					text_1.setText("");
+					text_2.setText("");
+					text_6.setText("");					
+				}else{
+					shell.setSize(750, 550);
+					isExtended = false;
+				}
 			}
 		});
 		btnProdotto.setBounds(555, 17, 130, 25);
