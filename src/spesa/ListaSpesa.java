@@ -37,7 +37,6 @@ public class ListaSpesa {
 				}
 			}
 		}
-		System.out.println("Prezzo: " + tot);
 		return tot;
 	}
 

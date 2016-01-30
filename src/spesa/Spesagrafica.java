@@ -3,6 +3,7 @@ package spesa;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
@@ -43,9 +44,7 @@ public class Spesagrafica {
 	private Text text;
 	private Text text_1;
 	private Text text_2;
-	private Text text_3;
 	private Text text_6;
-	private Text text_7;
 	private Button btnElimina;
 	private Button btnRistampa;
 	private Button btnTessera;
@@ -68,6 +67,8 @@ public class Spesagrafica {
 	private Label lblCarrello;
 	private Label lblNewLabel;
 	private DateTime dateTime;
+	private Label lblNewLabel_1;
+	private Label lblDsad;
 
 	/**
 	 * Launch the application.
@@ -135,7 +136,7 @@ public class Spesagrafica {
 		newNonAlimentare = new NonAlimentare("1314", "Bottiglia di birra", 5, "vetro");
 		n.inventario[4] = newNonAlimentare;
 		j++;
-		newNonAlimentare = new NonAlimentare("1516", "cartone di tavernello (no sta ciorlo)", 10, "carta");
+		newNonAlimentare = new NonAlimentare("1516", "cartone di tavernello", 10, "carta");
 		n.inventario[5] = newNonAlimentare;
 		j++;
 
@@ -158,9 +159,9 @@ public class Spesagrafica {
 		lblProdotti.setText("PRODOTTI");
 
 		lblTotale = new Label(shell, SWT.NONE);
-		lblTotale.setBounds(270, 482, 43, 15);
-		lblTotale.setText("TOTALE");
-		lblTotale.setVisible(false);
+		lblTotale.setBounds(380, 482, 55, 15);
+		lblTotale.setText("TOTALE :");
+		// lblTotale.setVisible(false);
 
 		lblCod = new Label(shell, SWT.NONE);
 		lblCod.setBounds(443, 144, 43, 15);
@@ -188,38 +189,75 @@ public class Spesagrafica {
 		lblMateriale.setVisible(false);
 
 		lblPrezzo_1 = new Label(shell, SWT.NONE);
-		lblPrezzo_1.setBounds(299, 106, 43, 15);
+		lblPrezzo_1.setBounds(299, 106, 37, 15);
 		lblPrezzo_1.setText("Prezzo:");
+		lblPrezzo_1.setVisible(false);
 
 		lblCarrello = new Label(shell, SWT.NONE);
 		lblCarrello.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblCarrello.setBounds(539, 67, 70, 15);
 		lblCarrello.setText("CARRELLO");
-		
+
 		lblNewLabel = new Label(shell, SWT.NONE);
-		lblNewLabel.setText("Aiuti");
+		lblNewLabel.setText("Hint");
 		lblNewLabel.setAlignment(SWT.CENTER);
-		lblNewLabel.setBounds(30, 472, 250, 30);
-		
+		lblNewLabel.setBounds(30, 450, 324, 52);
+
+		lblNewLabel_1 = new Label(shell, SWT.NONE);
+		lblNewLabel_1.setBounds(342, 106, 37, 15);
+
+		lblDsad = new Label(shell, SWT.NONE);
+		lblDsad.setBounds(441, 482, 55, 15);
+		lblDsad.setText("0.0");
 
 		list = new List(shell, SWT.BORDER);
 		list.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
 			public void mouseEnter(MouseEvent e) {
+				lblPrezzo_1.setVisible(true);
+				lblNewLabel_1.setVisible(true);
 				lblNewLabel.setText("");
 				lblNewLabel.setText("Click per visualizzare prezzo \nDoppio click per scegliere prodotto");
+				btnAlimentare.setVisible(false);
+				btnNonAlimentare.setVisible(false);
+				text.setVisible(false);
+				text_1.setVisible(false);
+				text_2.setVisible(false);
+				text_6.setVisible(false);
+				lblCod.setVisible(false);
+				lblDescrizione.setVisible(false);
+				lblMateriale.setVisible(false);
+				lblPrezzo.setVisible(false);
+				lblScadenza.setVisible(false);
+				dateTime.setVisible(false);
+				btnInserisciProdotto.setVisible(false);
+
+			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel.setText("");
+				lblPrezzo_1.setVisible(false);
+				lblNewLabel_1.setVisible(false);
 			}
 		});
 		list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				text_3.setText("");
-				;
-				list_1.setVisible(true);
-				stampa1();
-				pr = "" + n.inventario[list.getSelectionIndex()].getPrezzo();
-				text_3.setText(pr);
-				btnElimina.setVisible(true);
+
+				try {
+					lblNewLabel_1.setText("");
+					;
+					list_1.setVisible(true);
+					stampa1();
+					pr = "" + n.inventario[list.getSelectionIndex()].getPrezzo();
+					lblNewLabel_1.setText(pr);
+					btnElimina.setVisible(true);
+					lblNewLabel.setText("");
+					lblNewLabel.setText("\n" + n.inventario[list.getSelectionIndex()]);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+				}
 			}
 
 			@Override
@@ -233,22 +271,47 @@ public class Spesagrafica {
 		list_1.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
 			public void mouseEnter(MouseEvent e) {
+				lblPrezzo_1.setVisible(true);
+				lblNewLabel_1.setVisible(true);
 				lblNewLabel.setText("");
 				lblNewLabel.setText("Click per visualizzare prezzo");
+			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel.setText("");
+				lblPrezzo_1.setVisible(false);
+				lblNewLabel_1.setVisible(false);
 			}
 		});
 		list_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
-				text_3.setText("");
-				System.out.println(n.ls.carrello.get(list_1.getSelectionIndex()));
-				pr = "" + n.ls.carrello.get(list_1.getSelectionIndex()).getPrezzo();
-				text_3.setText(pr);
+				try {
+					lblNewLabel_1.setText("");
+					pr = "" + n.ls.carrello.get(list_1.getSelectionIndex()).getPrezzo();
+					lblNewLabel_1.setText(pr);
+					lblNewLabel.setText("");
+					lblNewLabel.setText("\n" + n.ls.carrello.get(list_1.getSelectionIndex()));
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+				}
 			}
 		});
 		list_1.setBounds(410, 102, 289, 301);
 
 		btnTessera = new Button(shell, SWT.CHECK);
+		btnTessera.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel.setText("Sconto su prodotti");
+			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel.setText("");
+			}
+		});
 		btnTessera.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -266,14 +329,19 @@ public class Spesagrafica {
 				lblNewLabel.setText("");
 				lblNewLabel.setText("Finisci spesa");
 			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel.setText("");
+			}
 		});
 		btnCassa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				text_7.setVisible(true);
+				lblDsad.setVisible(true);
 				lblTotale.setVisible(true);
 				tot = "" + n.ls.calcolaTotale(isTessera);
-				text_7.setText(tot);
+				lblDsad.setText(tot);
 				n.ls.tot = 0;
 
 			}
@@ -285,8 +353,18 @@ public class Spesagrafica {
 		btnScontrino.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
 			public void mouseEnter(MouseEvent e) {
+				lblDsad.setVisible(true);
+				lblTotale.setVisible(true);
+				tot = "" + n.ls.calcolaTotale(isTessera);
+				lblDsad.setText(tot);
+				n.ls.tot = 0;
 				lblNewLabel.setText("");
-				lblNewLabel.setText("Vai alla cassa");
+				lblNewLabel.setText("Vai alla cassa \nMouse Over per visualizzare totale");
+			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel.setText("");
 			}
 		});
 		btnScontrino.addMouseListener(new MouseAdapter() {
@@ -307,13 +385,24 @@ public class Spesagrafica {
 				lblNewLabel.setText("");
 				lblNewLabel.setText("Elimina prodotto dal carrello");
 			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel.setText("");
+			}
 		});
 		btnElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
-				n.ls.eliminaProdotto(list_1.getSelectionIndex());
-				list_1.remove(list_1.getSelectionIndex());
-				ristampa();
+
+				try {
+					n.ls.eliminaProdotto(list_1.getSelectionIndex());
+					list_1.remove(list_1.getSelectionIndex());
+					ristampa();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					MessageDialog.openInformation(shell, "ERRORE", "Seleziona elemento");
+				}
 			}
 		});
 		btnElimina.setBounds(443, 409, 75, 25);
@@ -326,16 +415,26 @@ public class Spesagrafica {
 				lblNewLabel.setText("");
 				lblNewLabel.setText("Elimina prodotto dalla lista");
 			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel.setText("");
+			}
 		});
 		btnEliminaProdotto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				int sel = list.getSelectionIndex();
-				for (int i = sel; i < j; i++) {
-					n.inventario[i] = n.inventario[i++];
+				try {
+					int sel = list.getSelectionIndex();
+					for (int i = sel; i < j; i++) {
+						n.inventario[i] = n.inventario[i++];
+					}
+					j--;
+					ristampa();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					MessageDialog.openInformation(shell, "ERRORE", "Seleziona elemento");
 				}
-				j--;
-				ristampa();
 			}
 		});
 		btnEliminaProdotto.setBounds(90, 419, 128, 25);
@@ -347,6 +446,11 @@ public class Spesagrafica {
 			public void mouseEnter(MouseEvent e) {
 				lblNewLabel.setText("");
 				lblNewLabel.setText("Inserisci prodotto");
+			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel.setText("");
 			}
 		});
 		btnInserisciProdotto.addSelectionListener(new SelectionAdapter() {
@@ -366,17 +470,10 @@ public class Spesagrafica {
 		text_2 = new Text(shell, SWT.BORDER);
 		text_2.setBounds(492, 232, 170, 21);
 		text_2.setVisible(false);
-		
-		text_3 = new Text(shell, SWT.BORDER);
-		text_3.setBounds(348, 103, 37, 21);
 
 		text_6 = new Text(shell, SWT.BORDER);
 		text_6.setBounds(492, 275, 170, 21);
 		text_6.setVisible(false);
-
-		text_7 = new Text(shell, SWT.BORDER);
-		text_7.setBounds(348, 479, 76, 21);
-		text_7.setVisible(false);
 
 		btnAlimentare = new Button(shell, SWT.RADIO);
 		btnAlimentare.addMouseListener(new MouseAdapter() {
@@ -438,6 +535,11 @@ public class Spesagrafica {
 				lblNewLabel.setText("");
 				lblNewLabel.setText("Inserisci nuovo prodotto nella lista");
 			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel.setText("");
+			}
 		});
 		btnProdotto.addMouseListener(new MouseAdapter() {
 			@Override
@@ -475,6 +577,11 @@ public class Spesagrafica {
 				lblNewLabel.setText("");
 				lblNewLabel.setText("Ristampa le liste");
 			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel.setText("");
+			}
 		});
 		btnRistampa.addMouseListener(new MouseAdapter() {
 			@Override
@@ -489,29 +596,44 @@ public class Spesagrafica {
 
 			@Override
 			public void mouseUp(MouseEvent e) {
-				list_1.setVisible(false);
-				if (j < 100) {
-					if (isAlimentare == true) {
-						cod = text.getText();
-						prezzo = Double.parseDouble(text_1.getText());
-						descr = text_2.getText();
-						g = dateTime.getDay();
-						m = dateTime.getMonth();
-						y = dateTime.getYear();
-						scadenza = new Data(g, m, y);
-						n.inventario[j] = new Alimentare(cod, descr, prezzo, scadenza);
-					} else {
-						cod = text.getText();
-						prezzo = Double.parseDouble(text_1.getText());
-						descr = text_2.getText();
-						materiale = text_6.getText();
-						n.inventario[j] = new NonAlimentare(cod, descr, prezzo, materiale);
+				try {
+					list_1.setVisible(false);
+					if (j < 100) {
+						if (isAlimentare == true) {
+							try {
+								cod = text.getText();
+								descr = text_2.getText();
+								g = dateTime.getDay();
+								m = dateTime.getMonth();
+								y = dateTime.getYear();
+								scadenza = new Data(g, m, y);
+								prezzo = Double.parseDouble(text_1.getText());
+								n.inventario[j] = new Alimentare(cod, descr, prezzo, scadenza);
+								j++;
+								ristampa();
+							} catch (Exception e1) {
+								// TODO Auto-generated catch block
+								MessageDialog.openInformation(shell, "ERRORE", "Prezzo = Numero!!! (es. 2.0)");
+							}
+						} else {
+							try {
+								cod = text.getText();
+								descr = text_2.getText();
+								materiale = text_6.getText();
+								prezzo = Double.parseDouble(text_1.getText());
+								n.inventario[j] = new NonAlimentare(cod, descr, prezzo, materiale);
+								j++;
+								ristampa();
+							} catch (Exception e1) {
+								// TODO Auto-generated catch block
+								MessageDialog.openInformation(shell, "ERRORE", "Prezzo = Numero!!! (es. 2.0)");
+							}
+						}
 					}
-				} else {
-					System.out.println("elimina qualche prodotto");
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					MessageDialog.openInformation(shell, "ERRORE", "Completa tutti i campi");
 				}
-				j++;
-				ristampa();
 
 			}
 
@@ -519,13 +641,18 @@ public class Spesagrafica {
 		btnInserisciProdotto.setBounds(555, 361, 128, 25);
 		btnInserisciProdotto.setText("NUOVO PRODOTTO");
 		btnInserisciProdotto.setVisible(false);
-		
+
 		Button btnScontrino_1 = new Button(shell, SWT.NONE);
 		btnScontrino_1.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
 			public void mouseEnter(MouseEvent e) {
 				lblNewLabel.setText("");
 				lblNewLabel.setText("Ristampa Scontrino");
+			}
+
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel.setText("");
 			}
 		});
 		btnScontrino_1.addMouseListener(new MouseAdapter() {
@@ -556,7 +683,7 @@ public class Spesagrafica {
 		});
 		btnScontrino_1.setBounds(443, 17, 80, 25);
 		btnScontrino_1.setText("SCONTRINO");
-		
+
 		stampa();
 
 	}
