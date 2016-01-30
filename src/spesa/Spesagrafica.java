@@ -13,6 +13,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.events.MouseTrackAdapter;
 
 public class Spesagrafica {
 
@@ -65,6 +66,7 @@ public class Spesagrafica {
 	private Label lblMateriale;
 	private Label lblPrezzo_1;
 	private Label lblCarrello;
+	private Label lblNewLabel;
 	private DateTime dateTime;
 
 	/**
@@ -193,8 +195,21 @@ public class Spesagrafica {
 		lblCarrello.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblCarrello.setBounds(539, 67, 70, 15);
 		lblCarrello.setText("CARRELLO");
+		
+		lblNewLabel = new Label(shell, SWT.NONE);
+		lblNewLabel.setText("Aiuti");
+		lblNewLabel.setAlignment(SWT.CENTER);
+		lblNewLabel.setBounds(30, 472, 250, 30);
+		
 
 		list = new List(shell, SWT.BORDER);
+		list.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel.setText("");
+				lblNewLabel.setText("Click per visualizzare prezzo \nDoppio click per scegliere prodotto");
+			}
+		});
 		list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -215,6 +230,13 @@ public class Spesagrafica {
 		list.setBounds(30, 102, 250, 301);
 
 		list_1 = new List(shell, SWT.BORDER);
+		list_1.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel.setText("");
+				lblNewLabel.setText("Click per visualizzare prezzo");
+			}
+		});
 		list_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
@@ -238,6 +260,13 @@ public class Spesagrafica {
 		btnTessera.setVisible(false);
 
 		btnCassa = new Button(shell, SWT.NONE);
+		btnCassa.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel.setText("");
+				lblNewLabel.setText("Finisci spesa");
+			}
+		});
 		btnCassa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -253,6 +282,13 @@ public class Spesagrafica {
 		btnCassa.setText("CASSA");
 
 		btnScontrino = new Button(shell, SWT.NONE);
+		btnScontrino.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel.setText("");
+				lblNewLabel.setText("Vai alla cassa");
+			}
+		});
 		btnScontrino.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -261,10 +297,17 @@ public class Spesagrafica {
 				btnTessera.setVisible(true);
 			}
 		});
-		btnScontrino.setBounds(553, 409, 75, 25);
-		btnScontrino.setText("SCONTRINO");
+		btnScontrino.setBounds(553, 409, 90, 25);
+		btnScontrino.setText("FINE SPESA");
 
 		btnElimina = new Button(shell, SWT.NONE);
+		btnElimina.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel.setText("");
+				lblNewLabel.setText("Elimina prodotto dal carrello");
+			}
+		});
 		btnElimina.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
@@ -277,6 +320,13 @@ public class Spesagrafica {
 		btnElimina.setText("ELIMINA");
 
 		btnEliminaProdotto = new Button(shell, SWT.NONE);
+		btnEliminaProdotto.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel.setText("");
+				lblNewLabel.setText("Elimina prodotto dalla lista");
+			}
+		});
 		btnEliminaProdotto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -292,6 +342,13 @@ public class Spesagrafica {
 		btnEliminaProdotto.setText("ELIMINA PRODOTTO");
 
 		btnInserisciProdotto = new Button(shell, SWT.NONE);
+		btnInserisciProdotto.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel.setText("");
+				lblNewLabel.setText("Inserisci prodotto");
+			}
+		});
 		btnInserisciProdotto.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -375,6 +432,13 @@ public class Spesagrafica {
 		btnNonAlimentare.setVisible(false);
 
 		btnProdotto = new Button(shell, SWT.NONE);
+		btnProdotto.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel.setText("");
+				lblNewLabel.setText("Inserisci nuovo prodotto nella lista");
+			}
+		});
 		btnProdotto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -401,10 +465,17 @@ public class Spesagrafica {
 				text_6.setText("");
 			}
 		});
-		btnProdotto.setBounds(587, 17, 75, 25);
-		btnProdotto.setText("PRODOTTO");
+		btnProdotto.setBounds(553, 17, 130, 25);
+		btnProdotto.setText("NUOVO PRODOTTO");
 
 		btnRistampa = new Button(shell, SWT.NONE);
+		btnRistampa.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel.setText("");
+				lblNewLabel.setText("Ristampa le liste");
+			}
+		});
 		btnRistampa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -450,6 +521,13 @@ public class Spesagrafica {
 		btnInserisciProdotto.setVisible(false);
 		
 		Button btnScontrino_1 = new Button(shell, SWT.NONE);
+		btnScontrino_1.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel.setText("");
+				lblNewLabel.setText("Ristampa Scontrino");
+			}
+		});
 		btnScontrino_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -476,7 +554,7 @@ public class Spesagrafica {
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		btnScontrino_1.setBounds(466, 17, 75, 25);
+		btnScontrino_1.setBounds(443, 17, 80, 25);
 		btnScontrino_1.setText("SCONTRINO");
 		
 		stampa();
