@@ -91,7 +91,12 @@ public class ListaSpesa {
 			for (int i = 0; i < carrello.size(); i++) {
 				Prodotto p = carrello.get(i);
 				try {
-
+					if (carrello.get(i) instanceof Alimentare == true){
+						scrittore.write("Alimentare" + "\r\n");
+					}
+					else{
+						scrittore.write("Non alimentare" + "\r\n");
+					}
 					scrittore.write(p.getDescr() + "\r\n");
 					scrittore.write(p.getCod() + "\r\n");
 					scrittore.write(p.getPrezzo() + "\r\n");

@@ -1,0 +1,8 @@
+Alimentare
+Pera
+0123
+0.3
+Alimentare
+Mela
+4567
+0.5
