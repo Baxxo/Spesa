@@ -131,13 +131,13 @@ public class Spesagrafica {
 		newAlimentare = new Alimentare("8910", "Banana", 0.7, new Data(10, 1, 2016));
 		n.inventario[2] = newAlimentare;
 		j++;
-		newNonAlimentare = new NonAlimentare("1112", "Bottiglia d'acqua", 1, "plastica");
+		newNonAlimentare = new NonAlimentare("1112", "Acqua", 1, "plastica");
 		n.inventario[3] = newNonAlimentare;
 		j++;
-		newNonAlimentare = new NonAlimentare("1314", "Bottiglia di birra", 5, "vetro");
+		newNonAlimentare = new NonAlimentare("1314", "Birra", 5, "vetro");
 		n.inventario[4] = newNonAlimentare;
 		j++;
-		newNonAlimentare = new NonAlimentare("1516", "cartone di tavernello", 10, "carta");
+		newNonAlimentare = new NonAlimentare("1516", "Tavernello", 10, "carta");
 		n.inventario[5] = newNonAlimentare;
 		j++;
 
@@ -681,6 +681,13 @@ public class Spesagrafica {
 		btnScontrino_1.setText("SCONTRINO");
 		
 		Button btnSalva = new Button(shell, SWT.NONE);
+		btnSalva.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel.setText("");
+				lblNewLabel.setText("Salva scontrino");
+			}
+		});
 		btnSalva.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -692,6 +699,13 @@ public class Spesagrafica {
 		btnSalva.setText("SALVA");
 		
 		Button btnCarica = new Button(shell, SWT.NONE);
+		btnCarica.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel.setText("");
+				lblNewLabel.setText("Carica ultimo scontrino");
+			}
+		});
 		btnCarica.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
