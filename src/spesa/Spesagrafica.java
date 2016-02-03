@@ -591,7 +591,7 @@ public class Spesagrafica {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				try {
-					list_1.setVisible(false);
+					//list_1.setVisible(false);
 					if (j < 100) {
 						if (isAlimentare == true) {
 							try {
@@ -652,6 +652,8 @@ public class Spesagrafica {
 		btnScontrino_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shell.setSize(750, 550);
+				isExtended = false;
 				list_1.setVisible(true);
 				btnElimina.setVisible(true);
 				btnScontrino.setVisible(true);
