@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jface.dialogs.MessageDialog;
+//import org.eclipse.jface.dialogs.MessageDialog;
 
 public class ListaSpesa {
 
