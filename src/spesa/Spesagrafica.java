@@ -665,6 +665,27 @@ public class Spesagrafica {
 		});
 		btnScontrino_1.setBounds(443, 17, 80, 25);
 		btnScontrino_1.setText("SCONTRINO");
+		
+		Button btnSalva = new Button(shell, SWT.NONE);
+		btnSalva.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				n.ls.salvaFile();
+				
+			}
+		});
+		btnSalva.setBounds(194, 17, 75, 25);
+		btnSalva.setText("SALVA");
+		
+		Button btnCarica = new Button(shell, SWT.NONE);
+		btnCarica.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				n.ls.caricaFile();
+			}
+		});
+		btnCarica.setBounds(194, 48, 75, 25);
+		btnCarica.setText("CARICA");
 
 		stampa();
 

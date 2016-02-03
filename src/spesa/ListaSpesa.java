@@ -59,23 +59,24 @@ public class ListaSpesa {
 		return Integer.parseInt(leggiStringa(br));
 	}
 
-	public void leggiFile() {
+	public void caricaFile() {
 		BufferedReader lettore;
-		String riga = "";
-		String testo = "";
-		try {
-			lettore = new BufferedReader(new FileReader("prova.txt"));
-			do {
-				testo = testo + riga + "\n";
-				riga = lettore.readLine();
-			} while (riga != null);
-			// MessageDialog.openInformation(shell, "Lettura file", "Riga: " +
-			// testo);
-			System.out.println(testo);
 
-		} catch (IOException e1) {
+		try {
+			lettore = new BufferedReader(new FileReader("Scontrino.txt"));
+			String s = null;
+			try {
+				s = lettore.readLine();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				// MessageDialog.openError(shell, "Lettura file", "ERRORE");
+				System.out.println(s);
+			}
+
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
 			// MessageDialog.openError(shell, "Lettura file", "ERRORE");
 			System.out.println("ERRORE");
 		}
@@ -90,8 +91,10 @@ public class ListaSpesa {
 			for (int i = 0; i < carrello.size(); i++) {
 				Prodotto p = carrello.get(i);
 				try {
-					scrittore.write(p.getDescr() + "\n");
-					scrittore.write(p.getCod() + "\n");
+
+					scrittore.write(p.getDescr() + "\r\n");
+					scrittore.write(p.getCod() + "\r\n");
+					scrittore.write(p.getPrezzo() + "\r\n");
 
 					// MessageDialog.openInformation(shell, "Scrittura file",
 					// "TUTTO OK");
