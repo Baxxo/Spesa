@@ -67,9 +67,10 @@ public class Spesagrafica {
 	private Label lblPrezzo_1;
 	private Label lblCarrello;
 	private Label lblNewLabel;
-	private DateTime dateTime;
 	private Label lblNewLabel_1;
+	private Label lblNewLabel_2;
 	private Label lblDsad;
+	private DateTime dateTime;
 
 	/**
 	 * Launch the application.
@@ -149,6 +150,17 @@ public class Spesagrafica {
 		shell.setText("SWT Application");
 
 		dateTime = new DateTime(shell, SWT.BORDER);
+		dateTime.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel_2.setText("");
+				lblNewLabel_2.setText("Data scadenza");
+			}
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel_2.setText("");
+			}
+		});
 		dateTime.setBounds(843, 275, 80, 24);
 		dateTime.setVisible(false);
 
@@ -447,13 +459,12 @@ public class Spesagrafica {
 		btnInserisciProdotto.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
 			public void mouseEnter(MouseEvent e) {
-				lblNewLabel.setText("");
-				lblNewLabel.setText("Inserisci prodotto");
+				lblNewLabel_2.setText("");
+				lblNewLabel_2.setText("Inserisci prodotto");
 			}
-
 			@Override
 			public void mouseExit(MouseEvent e) {
-				lblNewLabel.setText("");
+				lblNewLabel_2.setText("");
 			}
 		});
 		btnInserisciProdotto.addSelectionListener(new SelectionAdapter() {
@@ -463,18 +474,62 @@ public class Spesagrafica {
 		});
 
 		text = new Text(shell, SWT.BORDER);
+		text.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel_2.setText("");
+				lblNewLabel_2.setText("Codice a barre del prodotto");
+			}
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel_2.setText("");
+			}
+		});
 		text.setBounds(843, 141, 170, 21);
 		text.setVisible(false);
 
 		text_1 = new Text(shell, SWT.BORDER);
+		text_1.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel_2.setText("");
+				lblNewLabel_2.setText("Prezzo \nEs.: 2.0");
+			}
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel_2.setText("");
+			}
+		});
 		text_1.setBounds(843, 186, 170, 21);
 		text_1.setVisible(false);
 
 		text_2 = new Text(shell, SWT.BORDER);
+		text_2.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel_2.setText("");
+				lblNewLabel_2.setText("Nome prodotto");
+			}
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel_2.setText("");
+			}
+		});
 		text_2.setBounds(843, 232, 170, 21);
 		text_2.setVisible(false);
 
 		text_6 = new Text(shell, SWT.BORDER);
+		text_6.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel_2.setText("");
+				lblNewLabel_2.setText("Materiale di composizione prodotto \nEs: plastica, carta, vetro");
+			}
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel_2.setText("");
+			}
+		});
 		text_6.setBounds(843, 275, 170, 21);
 		text_6.setVisible(false);
 
@@ -631,7 +686,7 @@ public class Spesagrafica {
 			}
 
 		});
-		btnInserisciProdotto.setBounds(819, 379, 128, 25);
+		btnInserisciProdotto.setBounds(787, 378, 128, 25);
 		btnInserisciProdotto.setText("NUOVO PRODOTTO");
 		btnInserisciProdotto.setVisible(false);
 
@@ -713,6 +768,11 @@ public class Spesagrafica {
 		});
 		btnCarica.setBounds(193, 17, 75, 25);
 		btnCarica.setText("CARICA");
+		
+		lblNewLabel_2 = new Label(shell, SWT.NONE);
+		lblNewLabel_2.setAlignment(SWT.CENTER);
+		lblNewLabel_2.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblNewLabel_2.setBounds(768, 419, 191, 78);
 
 		
 
