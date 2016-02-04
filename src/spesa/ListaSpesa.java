@@ -18,7 +18,12 @@ public class ListaSpesa {
 	}
 
 	public void aggiungiProdotto(Prodotto p) {
-		carrello.add(p);
+		try {
+			carrello.add(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public double calcolaTotale(boolean Tessera) {
