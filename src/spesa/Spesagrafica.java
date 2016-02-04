@@ -215,7 +215,7 @@ public class Spesagrafica {
 		lblNewLabel = new Label(shell, SWT.NONE);
 		lblNewLabel.setText("Hint");
 		lblNewLabel.setAlignment(SWT.CENTER);
-		lblNewLabel.setBounds(30, 450, 324, 52);
+		lblNewLabel.setBounds(30, 450, 250, 52);
 
 		lblNewLabel_1 = new Label(shell, SWT.NONE);
 		lblNewLabel_1.setBounds(342, 106, 37, 15);
@@ -231,29 +231,13 @@ public class Spesagrafica {
 				lblPrezzo_1.setVisible(true);
 				lblNewLabel_1.setVisible(true);
 				lblNewLabel.setText("");
-				lblNewLabel.setText(
-						"Lista prodotti negozio\nClick per visualizzare prezzo \nDoppio click per scegliere prodotto");
-				btnAlimentare.setVisible(false);
-				btnNonAlimentare.setVisible(false);
-				text.setVisible(false);
-				text_1.setVisible(false);
-				text_2.setVisible(false);
-				text_6.setVisible(false);
-				lblCod.setVisible(false);
-				lblDescrizione.setVisible(false);
-				lblMateriale.setVisible(false);
-				lblPrezzo.setVisible(false);
-				lblScadenza.setVisible(false);
-				dateTime.setVisible(false);
-				btnInserisciProdotto.setVisible(false);
+				lblNewLabel.setText("Lista prodotti negozio\nClick per visualizzare prezzo \nDoppio click per scegliere prodotto");
 
 			}
 
 			@Override
 			public void mouseExit(MouseEvent e) {
 				lblNewLabel.setText("");
-				lblPrezzo_1.setVisible(false);
-				lblNewLabel_1.setVisible(false);
 			}
 		});
 		list.addMouseListener(new MouseAdapter() {
@@ -295,8 +279,6 @@ public class Spesagrafica {
 			@Override
 			public void mouseExit(MouseEvent e) {
 				lblNewLabel.setText("");
-				lblPrezzo_1.setVisible(false);
-				lblNewLabel_1.setVisible(false);
 			}
 		});
 		list_1.addMouseListener(new MouseAdapter() {
@@ -589,8 +571,13 @@ public class Spesagrafica {
 		btnProdotto.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
 			public void mouseEnter(MouseEvent e) {
-				lblNewLabel.setText("");
-				lblNewLabel.setText("Inserisci nuovo prodotto nella lista");
+				if(isExtended == true){
+					lblNewLabel.setText("");
+					lblNewLabel.setText("Nascondi inserimento");						
+				}else{
+					lblNewLabel.setText("");
+					lblNewLabel.setText("Inserisci nuovo prodotto nella lista");					
+				}
 			}
 
 			@Override
@@ -601,6 +588,7 @@ public class Spesagrafica {
 		btnProdotto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				btnProdotto.setText("NASCONDI");
 				if (isExtended == false) {
 					isExtended = true;
 					shell.setSize(1100, 550);
@@ -610,7 +598,8 @@ public class Spesagrafica {
 					text_1.setText("");
 					text_2.setText("");
 					text_6.setText("");
-				} else {
+				} else if(btnProdotto.getText().equals("NASCONDI")) {	
+					btnProdotto.setText("NUOVO PRODOTTO");		
 					shell.setSize(750, 550);
 					isExtended = false;
 				}
