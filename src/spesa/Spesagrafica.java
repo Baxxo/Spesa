@@ -21,6 +21,7 @@ public class Spesagrafica {
 	protected Shell shell;
 
 	Negozio n = new Negozio();
+	private double t = 0;
 	private int l = n.inventario.length;
 	private int j = 0;
 	private int g;
@@ -77,9 +78,9 @@ public class Spesagrafica {
 	 * 
 	 * @param args
 	 */
-	
+
 	public static Spesagrafica window;
-	
+
 	public static void main(String[] args) {
 		window = new Spesagrafica();
 		try {
@@ -126,23 +127,22 @@ public class Spesagrafica {
 	 */
 	protected void createContents() {
 
-		newAlimentare = new Alimentare("0123", "Pera", 0.3, new Data(26, 1, 2016));
-		n.inventario[0] = newAlimentare;
+		n.inventario[0] = new Alimentare("0123", "Pera", 0.3, new Data(26, 1, 2020));
 		j++;
-		newAlimentare = new Alimentare("4567", "Mela", 0.5, new Data(22, 1, 2016));
-		n.inventario[1] = newAlimentare;
-		j++;
-		newAlimentare = new Alimentare("8910", "Banana", 0.7, new Data(10, 1, 2016));
-		n.inventario[2] = newAlimentare;
-		j++;
-		newNonAlimentare = new NonAlimentare("1112", "Acqua", 1, "plastica");
-		n.inventario[3] = newNonAlimentare;
-		j++;
-		newNonAlimentare = new NonAlimentare("1314", "Birra", 5, "vetro");
-		n.inventario[4] = newNonAlimentare;
-		j++;
-		newNonAlimentare = new NonAlimentare("1516", "Tavernello", 10, "carta");
-		n.inventario[5] = newNonAlimentare;
+
+		n.inventario[1] = new Alimentare("4567", "Mela", 0.5, new Data(22, 1, 2020));
+		j++;		
+		
+		n.inventario[2] = new Alimentare("8910", "Banana", 0.7, new Data(10, 1, 2020));
+		j++;		
+		
+		n.inventario[3] = new NonAlimentare("1112", "Acqua", 1, "plastica");
+		j++;		
+		
+		n.inventario[4] = new NonAlimentare("1314", "Birra", 5, "vetro");
+		j++;		
+		
+		n.inventario[5] = new NonAlimentare("1516", "Tavernello", 10, "carta");
 		j++;
 
 		shell = new Shell();
@@ -156,6 +156,7 @@ public class Spesagrafica {
 				lblNewLabel_2.setText("");
 				lblNewLabel_2.setText("Data scadenza");
 			}
+
 			@Override
 			public void mouseExit(MouseEvent e) {
 				lblNewLabel_2.setText("");
@@ -175,7 +176,7 @@ public class Spesagrafica {
 		lblProdotti.setText("PRODOTTI");
 
 		lblTotale = new Label(shell, SWT.NONE);
-		lblTotale.setBounds(380, 482, 55, 15);
+		lblTotale.setBounds(352, 482, 55, 15);
 		lblTotale.setText("TOTALE :");
 
 		lblCod = new Label(shell, SWT.NONE);
@@ -221,7 +222,7 @@ public class Spesagrafica {
 		lblNewLabel_1.setBounds(342, 106, 37, 15);
 
 		lblDsad = new Label(shell, SWT.NONE);
-		lblDsad.setBounds(441, 482, 55, 15);
+		lblDsad.setBounds(413, 482, 97, 15);
 		lblDsad.setText("0.0");
 
 		list = new List(shell, SWT.BORDER);
@@ -231,7 +232,8 @@ public class Spesagrafica {
 				lblPrezzo_1.setVisible(true);
 				lblNewLabel_1.setVisible(true);
 				lblNewLabel.setText("");
-				lblNewLabel.setText("Lista prodotti negozio\nClick per visualizzare prezzo \nDoppio click per scegliere prodotto");
+				lblNewLabel.setText(
+						"Lista prodotti negozio\nClick per visualizzare prezzo \nDoppio click per scegliere prodotto");
 
 			}
 
@@ -253,7 +255,7 @@ public class Spesagrafica {
 					lblNewLabel_1.setText(pr);
 					btnElimina.setVisible(true);
 					lblNewLabel.setText("");
-					lblNewLabel.setText("\n" + n.inventario[list.getSelectionIndex()]);
+					lblNewLabel.setText("" + n.inventario[list.getSelectionIndex()]);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 				}
@@ -262,6 +264,7 @@ public class Spesagrafica {
 			@Override
 			public void mouseDoubleClick(MouseEvent e) {
 				n.ls.aggiungiProdotto(n.inventario[list.getSelectionIndex()]);
+				btnScontrino.setVisible(true);
 			}
 		});
 		list.setBounds(30, 102, 250, 301);
@@ -290,6 +293,7 @@ public class Spesagrafica {
 					lblNewLabel_1.setText(pr);
 					lblNewLabel.setText("");
 					lblNewLabel.setText("\n" + n.ls.carrello.get(list_1.getSelectionIndex()));
+					btnScontrino.setVisible(true);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 				}
@@ -313,6 +317,7 @@ public class Spesagrafica {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				isTessera = true;
+				btnCassa.setVisible(true);
 			}
 		});
 		btnTessera.setBounds(516, 481, 93, 16);
@@ -337,14 +342,19 @@ public class Spesagrafica {
 			public void mouseUp(MouseEvent e) {
 				lblDsad.setVisible(true);
 				lblTotale.setVisible(true);
-				tot = "" + n.ls.calcolaTotale(isTessera);
+				t = Math.floor(n.ls.calcolaTotale(isTessera) * 100.0) / 100.0;
+				tot = "" + t;
+				t = 0;
 				lblDsad.setText(tot);
+				tot = "";
 				n.ls.tot = 0;
-
+				btnCassa.setVisible(false);
+				btnTessera.setVisible(false);
 			}
 		});
 		btnCassa.setBounds(632, 477, 75, 25);
 		btnCassa.setText("CASSA");
+		btnCassa.setVisible(false);
 
 		btnScontrino = new Button(shell, SWT.NONE);
 		btnScontrino.addMouseTrackListener(new MouseTrackAdapter() {
@@ -352,9 +362,6 @@ public class Spesagrafica {
 			public void mouseEnter(MouseEvent e) {
 				lblDsad.setVisible(true);
 				lblTotale.setVisible(true);
-				tot = "" + n.ls.calcolaTotale(isTessera);
-				lblDsad.setText(tot);
-				n.ls.tot = 0;
 				lblNewLabel.setText("");
 				lblNewLabel.setText("Vai alla cassa \nMouse Over per visualizzare totale");
 			}
@@ -370,10 +377,14 @@ public class Spesagrafica {
 				list_1.setVisible(true);
 				setScontrino(true);
 				btnTessera.setVisible(true);
+				btnCassa.setVisible(true);
+				lblDsad.setText("");
+				// btnScontrino.setVisible(false);
 			}
 		});
 		btnScontrino.setBounds(553, 409, 90, 25);
 		btnScontrino.setText("FINE SPESA");
+		// btnScontrino.setVisible(false);
 
 		btnElimina = new Button(shell, SWT.NONE);
 		btnElimina.addMouseTrackListener(new MouseTrackAdapter() {
@@ -444,6 +455,7 @@ public class Spesagrafica {
 				lblNewLabel_2.setText("");
 				lblNewLabel_2.setText("Inserisci prodotto");
 			}
+
 			@Override
 			public void mouseExit(MouseEvent e) {
 				lblNewLabel_2.setText("");
@@ -462,6 +474,7 @@ public class Spesagrafica {
 				lblNewLabel_2.setText("");
 				lblNewLabel_2.setText("Codice a barre del prodotto");
 			}
+
 			@Override
 			public void mouseExit(MouseEvent e) {
 				lblNewLabel_2.setText("");
@@ -477,6 +490,7 @@ public class Spesagrafica {
 				lblNewLabel_2.setText("");
 				lblNewLabel_2.setText("Prezzo \nEs.: 2.0");
 			}
+
 			@Override
 			public void mouseExit(MouseEvent e) {
 				lblNewLabel_2.setText("");
@@ -492,6 +506,7 @@ public class Spesagrafica {
 				lblNewLabel_2.setText("");
 				lblNewLabel_2.setText("Nome prodotto");
 			}
+
 			@Override
 			public void mouseExit(MouseEvent e) {
 				lblNewLabel_2.setText("");
@@ -507,6 +522,7 @@ public class Spesagrafica {
 				lblNewLabel_2.setText("");
 				lblNewLabel_2.setText("Materiale di composizione prodotto \nEs: plastica, carta, vetro");
 			}
+
 			@Override
 			public void mouseExit(MouseEvent e) {
 				lblNewLabel_2.setText("");
@@ -571,12 +587,12 @@ public class Spesagrafica {
 		btnProdotto.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
 			public void mouseEnter(MouseEvent e) {
-				if(isExtended == true){
+				if (isExtended == true) {
 					lblNewLabel.setText("");
-					lblNewLabel.setText("Nascondi inserimento");						
-				}else{
+					lblNewLabel.setText("Nascondi inserimento");
+				} else {
 					lblNewLabel.setText("");
-					lblNewLabel.setText("Inserisci nuovo prodotto nella lista");					
+					lblNewLabel.setText("Inserisci nuovo prodotto nella lista");
 				}
 			}
 
@@ -598,8 +614,8 @@ public class Spesagrafica {
 					text_1.setText("");
 					text_2.setText("");
 					text_6.setText("");
-				} else if(btnProdotto.getText().equals("NASCONDI")) {	
-					btnProdotto.setText("NUOVO PRODOTTO");		
+				} else if (btnProdotto.getText().equals("NASCONDI")) {
+					btnProdotto.setText("NUOVO PRODOTTO");
 					shell.setSize(750, 550);
 					isExtended = false;
 				}
@@ -757,13 +773,11 @@ public class Spesagrafica {
 		});
 		btnCarica.setBounds(193, 17, 75, 25);
 		btnCarica.setText("CARICA");
-		
+
 		lblNewLabel_2 = new Label(shell, SWT.NONE);
 		lblNewLabel_2.setAlignment(SWT.CENTER);
 		lblNewLabel_2.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblNewLabel_2.setBounds(768, 419, 191, 78);
-
-		
 
 		stampa();
 

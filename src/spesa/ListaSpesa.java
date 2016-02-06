@@ -27,6 +27,7 @@ public class ListaSpesa {
 	}
 
 	public double calcolaTotale(boolean Tessera) {
+		tot=0;
 		if (Tessera == false) {
 			for (int i = 0; i < carrello.size(); i++) {
 				tot += carrello.get(i).getPrezzo();
@@ -35,12 +36,12 @@ public class ListaSpesa {
 			for (int i = 0; i < carrello.size(); i++) {
 				if (carrello.get(i) instanceof Alimentare == true) {
 					a = (Alimentare) carrello.get(i);
-					a.applicaSconto();
-					tot = tot + a.getPrezzo();
+					a.applicaSconto(new Data());
+					tot = tot + a.getP();
 				} else {
 					n = (NonAlimentare) carrello.get(i);
 					n.applicaSconto();
-					tot = tot + n.getPrezzo();
+					tot = tot + n.getP();
 				}
 			}
 		}

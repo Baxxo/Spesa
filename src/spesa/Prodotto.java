@@ -38,10 +38,6 @@ public class Prodotto {
 		this.prezzo = prezzo;
 	}
 
-	public void applicaSconto() {
-		prezzo -= prezzo / 100 * 5;
-	}
-
 	public String toString() {
 		return "Prodotto [cod=" + cod + ", descr=" + descr + ", prezzo=" + prezzo + "]";
 	}

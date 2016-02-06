@@ -3,6 +3,11 @@ package spesa;
 class Alimentare extends Prodotto {
 
 	Data scadenza;
+	private double p = 0;
+
+	public double getP() {
+		return p;
+	}
 
 	public Alimentare(String cod, String descr, double prezzo, Data scadenza) {
 		super(cod, descr, prezzo);
@@ -14,10 +19,9 @@ class Alimentare extends Prodotto {
 	}
 
 	public void applicaSconto(Data oggi){
-		System.out.println("oggi: "+oggi);
+		p = prezzo;
 		if (scadenza.getDifference(oggi) > 10) {
-			prezzo -= prezzo / 100 * 20;
-			System.out.println(prezzo);
+			p -= prezzo / 100 * 20;
 		}
 	}
 }
