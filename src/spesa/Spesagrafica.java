@@ -453,7 +453,7 @@ public class Spesagrafica {
 			@Override
 			public void mouseEnter(MouseEvent e) {
 				lblNewLabel_2.setText("");
-				lblNewLabel_2.setText("Inserisci prodotto");
+				lblNewLabel_2.setText("crea prodotto");
 			}
 
 			@Override
@@ -532,6 +532,17 @@ public class Spesagrafica {
 		text_6.setVisible(false);
 
 		btnAlimentare = new Button(shell, SWT.RADIO);
+		btnAlimentare.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel_2.setText("");
+				lblNewLabel_2.setText("Prodotto alimentare");
+			}
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel_2.setText("");
+			}
+		});
 		btnAlimentare.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -555,6 +566,17 @@ public class Spesagrafica {
 		btnAlimentare.setText("Alimentare");
 
 		btnNonAlimentare = new Button(shell, SWT.RADIO);
+		btnNonAlimentare.addMouseTrackListener(new MouseTrackAdapter() {
+			@Override
+			public void mouseEnter(MouseEvent e) {
+				lblNewLabel_2.setText("");
+				lblNewLabel_2.setText("Prodotto non alimentare");
+			}
+			@Override
+			public void mouseExit(MouseEvent e) {
+				lblNewLabel_2.setText("");
+			}
+		});
 		btnNonAlimentare.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -614,6 +636,7 @@ public class Spesagrafica {
 					text_1.setText("");
 					text_2.setText("");
 					text_6.setText("");
+					lblNewLabel_2.setVisible(true);
 				} else if (btnProdotto.getText().equals("NASCONDI")) {
 					btnProdotto.setText("NUOVO PRODOTTO");
 					shell.setSize(750, 550);
