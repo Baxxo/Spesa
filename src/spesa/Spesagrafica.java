@@ -39,8 +39,6 @@ public class Spesagrafica {
 	private String materiale;
 	private String pr;
 	private Data scadenza;
-	private Alimentare newAlimentare;
-	private NonAlimentare newNonAlimentare;
 	private List list;
 	private List list_1;
 	private Text text;
