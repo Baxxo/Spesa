@@ -95,7 +95,8 @@ public class ListaSpesa {
 						n.setCod(parti[2]);
 						n.setPrezzo(Double.parseDouble(parti[3]));
 						n.setMateriale(parti[4]);
-						aggiungiProdotto(n);						
+						aggiungiProdotto(n);	
+						//Sys
 					}
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
