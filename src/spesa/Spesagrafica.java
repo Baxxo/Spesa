@@ -796,10 +796,12 @@ public class Spesagrafica {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				n.ls.caricaFile();
+				stampa1();
 			}
 		});
 		btnCarica.setBounds(193, 17, 75, 25);
 		btnCarica.setText("CARICA");
+
 
 		lblNewLabel_2 = new Label(shell, SWT.NONE);
 		lblNewLabel_2.setAlignment(SWT.CENTER);

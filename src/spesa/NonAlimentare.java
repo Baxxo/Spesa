@@ -14,6 +14,14 @@ public class NonAlimentare extends Prodotto {
 		this.materiale = materiale;
 	}
 
+	public String getMateriale() {
+		return materiale;
+	}
+
+	public void setMateriale(String materiale) {
+		this.materiale = materiale;
+	}
+
 	public NonAlimentare() {
 		// TODO Auto-generated constructor stub
 	}
