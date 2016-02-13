@@ -805,24 +805,6 @@ public class Spesagrafica {
 		lblNewLabel_2.setAlignment(SWT.CENTER);
 		lblNewLabel_2.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblNewLabel_2.setBounds(768, 419, 191, 78);
-		
-		Button btnAprifile = new Button(shell, SWT.NONE);
-		btnAprifile.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseUp(MouseEvent e) {
-				FileDialog fileDialog = new FileDialog(shell);
-				fileDialog.setFilterExtensions(new String[]{"*.txt", "*.csv", "*.*"}); //opzionale
-				String fileScelto = fileDialog.open();
-
-				if(fileScelto != null) {
-					MessageDialog.openInformation(shell, "File ", fileScelto);
-					MessageDialog.openInformation(shell, "File (solo nome)", fileDialog.getFileName());
-				}
-
-			}
-		});
-		btnAprifile.setBounds(10, 48, 75, 25);
-		btnAprifile.setText("Apri file");
 
 		stampa();
 
