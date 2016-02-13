@@ -76,9 +76,12 @@ public class Spesagrafica {
 	 * 
 	 * @param args
 	 */
+
+	public static Spesagrafica window;
+
 	public static void main(String[] args) {
+		window = new Spesagrafica();
 		try {
-			Spesagrafica window = new Spesagrafica();
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -216,7 +219,8 @@ public class Spesagrafica {
 				lblPrezzo_1.setVisible(true);
 				lblNewLabel_1.setVisible(true);
 				lblNewLabel.setText("");
-				lblNewLabel.setText("Click per visualizzare prezzo \nDoppio click per scegliere prodotto");
+				lblNewLabel.setText(
+						"Lista prodotti negozio\nClick per visualizzare prezzo \nDoppio click per scegliere prodotto");
 				btnAlimentare.setVisible(false);
 				btnNonAlimentare.setVisible(false);
 				text.setVisible(false);
@@ -273,7 +277,7 @@ public class Spesagrafica {
 				lblPrezzo_1.setVisible(true);
 				lblNewLabel_1.setVisible(true);
 				lblNewLabel.setText("");
-				lblNewLabel.setText("Click per visualizzare prezzo");
+				lblNewLabel.setText("Lista oggetti nel carrello\nClick per visualizzare prezzo");
 			}
 
 			@Override
@@ -412,7 +416,7 @@ public class Spesagrafica {
 			@Override
 			public void mouseEnter(MouseEvent e) {
 				lblNewLabel.setText("");
-				lblNewLabel.setText("Elimina prodotto dalla lista");
+				lblNewLabel.setText("Elimina prodotto dal negozio");
 			}
 
 			@Override
@@ -478,7 +482,6 @@ public class Spesagrafica {
 		btnAlimentare.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				//list_1.setVisible(false);
 				btnInserisciProdotto.setVisible(true);
 				if (btnAlimentare.getSelection() == true) {
 					isAlimentare = true;
@@ -491,7 +494,6 @@ public class Spesagrafica {
 					lblScadenza.setVisible(true);
 					dateTime.setVisible(true);
 					text_6.setVisible(false);
-					//btnElimina.setVisible(false);
 					lblMateriale.setVisible(false);
 				}
 			}
@@ -503,7 +505,6 @@ public class Spesagrafica {
 		btnNonAlimentare.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				//list_1.setVisible(false);
 				btnInserisciProdotto.setVisible(true);
 				if (btnNonAlimentare.getSelection() == true) {
 					isAlimentare = false;
@@ -517,7 +518,6 @@ public class Spesagrafica {
 					lblMateriale.setVisible(true);
 					lblDescrizione.setVisible(true);
 					dateTime.setVisible(false);
-					//btnElimina.setVisible(false);
 					lblScadenza.setVisible(false);
 				}
 			}
@@ -546,16 +546,16 @@ public class Spesagrafica {
 		btnProdotto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				if(isExtended == false){
+				if (isExtended == false) {
 					isExtended = true;
-					shell.setSize(1100,550);
+					shell.setSize(1100, 550);
 					btnAlimentare.setVisible(true);
 					btnNonAlimentare.setVisible(true);
 					text.setText("");
 					text_1.setText("");
 					text_2.setText("");
-					text_6.setText("");					
-				}else{
+					text_6.setText("");
+				} else {
 					shell.setSize(750, 550);
 					isExtended = false;
 				}
@@ -583,7 +583,7 @@ public class Spesagrafica {
 				ristampa();
 			}
 		});
-		btnRistampa.setBounds(76, 17, 75, 25);
+		btnRistampa.setBounds(30, 17, 75, 25);
 		btnRistampa.setText("RISTAMPA");
 
 		btnInserisciProdotto.addMouseListener(new MouseAdapter() {
@@ -591,7 +591,6 @@ public class Spesagrafica {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				try {
-					//list_1.setVisible(false);
 					if (j < 100) {
 						if (isAlimentare == true) {
 							try {
@@ -679,7 +678,7 @@ public class Spesagrafica {
 		});
 		btnScontrino_1.setBounds(443, 17, 80, 25);
 		btnScontrino_1.setText("SCONTRINO");
-		
+
 		Button btnSalva = new Button(shell, SWT.NONE);
 		btnSalva.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
@@ -692,12 +691,12 @@ public class Spesagrafica {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				n.ls.salvaFile();
-				
+
 			}
 		});
-		btnSalva.setBounds(194, 17, 75, 25);
+		btnSalva.setBounds(112, 17, 75, 25);
 		btnSalva.setText("SALVA");
-		
+
 		Button btnCarica = new Button(shell, SWT.NONE);
 		btnCarica.addMouseTrackListener(new MouseTrackAdapter() {
 			@Override
@@ -710,9 +709,10 @@ public class Spesagrafica {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				n.ls.caricaFile();
+				stampa1();
 			}
 		});
-		btnCarica.setBounds(194, 48, 75, 25);
+		btnCarica.setBounds(193, 17, 75, 25);
 		btnCarica.setText("CARICA");
 
 		stampa();

@@ -9,6 +9,14 @@ class Alimentare extends Prodotto {
 		this.scadenza = scadenza;
 	}
 
+	public Data getScadenza() {
+		return scadenza;
+	}
+
+	public void setScadenza(Data scadenza) {
+		this.scadenza = scadenza;
+	}
+
 	public Alimentare() {
 		// TODO Auto-generated constructor stub
 	}

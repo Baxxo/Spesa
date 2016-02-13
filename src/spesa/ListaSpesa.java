@@ -1,3 +1,4 @@
+
 package spesa;
 
 import java.io.*;
@@ -18,7 +19,12 @@ public class ListaSpesa {
 	}
 
 	public void aggiungiProdotto(Prodotto p) {
-		carrello.add(p);
+		try {
+			carrello.add(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public double calcolaTotale(boolean Tessera) {
@@ -60,20 +66,44 @@ public class ListaSpesa {
 	}
 
 	public void caricaFile() {
+		carrello.clear();
 		BufferedReader lettore;
 
 		try {
 			lettore = new BufferedReader(new FileReader("Scontrino.txt"));
-			String s = null;
-			try {
-				s = lettore.readLine();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				// MessageDialog.openError(shell, "Lettura file", "ERRORE");
-				System.out.println(s);
-			}
+			while (true) {
+				try {
+					//String line = lettore.readLine();
+					String s = lettore.readLine();
+					if (s == null)
+						break;
 
+					
+					String[] parti = s.split(",");
+					if (parti[0].equalsIgnoreCase("Alimentare")) {
+						Alimentare a = new Alimentare();
+						a.setDescr(parti[1]);
+						a.setCod(parti[2]);
+						a.setPrezzo(Double.parseDouble(parti[3]));
+						String[] d = parti[4].split("/");
+						Data scadenza = new Data(Integer.parseInt(d[0]),Integer.parseInt(d[1]),Integer.parseInt(d[2]));
+						a.setScadenza(scadenza);
+						aggiungiProdotto(a);
+					} else{
+						NonAlimentare n = new NonAlimentare();
+						n.setDescr(parti[1]);
+						n.setCod(parti[2]);
+						n.setPrezzo(Double.parseDouble(parti[3]));
+						n.setMateriale(parti[4]);
+						aggiungiProdotto(n);						
+					}
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					System.out.println("ciao");
+					// MessageDialog.openError(shell, "Lettura file", "ERRORE");
+				}
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,15 +121,21 @@ public class ListaSpesa {
 			for (int i = 0; i < carrello.size(); i++) {
 				Prodotto p = carrello.get(i);
 				try {
-					if (carrello.get(i) instanceof Alimentare == true){
-						scrittore.write("Alimentare" + "\r\n");
+					if (carrello.get(i) instanceof Alimentare == true) {
+						a = (Alimentare) p;
+						scrittore.write("Alimentare" + ",");
+						scrittore.write(a.getDescr() + ",");
+						scrittore.write(a.getCod() + ",");
+						scrittore.write(a.getPrezzo() + ",");
+						scrittore.write(a.getScadenza() + "\r\n");
+					} else {
+						n = (NonAlimentare) p;
+						scrittore.write("Non alimentare" + ",");
+						scrittore.write(n.getDescr() + ",");
+						scrittore.write(n.getCod() + ",");
+						scrittore.write(n.getPrezzo() + ",");
+						scrittore.write(n.getMateriale() + "\r\n");
 					}
-					else{
-						scrittore.write("Non alimentare" + "\r\n");
-					}
-					scrittore.write(p.getDescr() + "\r\n");
-					scrittore.write(p.getCod() + "\r\n");
-					scrittore.write(p.getPrezzo() + "\r\n");
 
 					// MessageDialog.openInformation(shell, "Scrittura file",
 					// "TUTTO OK");
