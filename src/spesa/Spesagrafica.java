@@ -1,9 +1,10 @@
 package spesa;
 
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
@@ -684,6 +685,8 @@ public class Spesagrafica {
 								prezzo = Double.parseDouble(text_1.getText());
 								n.inventario[j] = new Alimentare(cod, descr, prezzo, scadenza);
 								j++;
+								shell.setSize(750,550);
+								btnProdotto.setText("NUOVO PRODOTTO");
 								ristampa();
 							} catch (Exception e1) {
 								// TODO Auto-generated catch block
@@ -697,6 +700,8 @@ public class Spesagrafica {
 								prezzo = Double.parseDouble(text_1.getText());
 								n.inventario[j] = new NonAlimentare(cod, descr, prezzo, materiale);
 								j++;
+								shell.setSize(750,550);
+								btnProdotto.setText("NUOVO PRODOTTO");
 								ristampa();
 							} catch (Exception e1) {
 								// TODO Auto-generated catch block
@@ -750,6 +755,7 @@ public class Spesagrafica {
 				lblScadenza.setVisible(false);
 				dateTime.setVisible(false);
 				btnInserisciProdotto.setVisible(false);
+				btnProdotto.setText("NUOVO PRODOTTO");
 			}
 		});
 		btnScontrino_1.addSelectionListener(new SelectionAdapter() {
@@ -799,6 +805,24 @@ public class Spesagrafica {
 		lblNewLabel_2.setAlignment(SWT.CENTER);
 		lblNewLabel_2.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
 		lblNewLabel_2.setBounds(768, 419, 191, 78);
+		
+		Button btnAprifile = new Button(shell, SWT.NONE);
+		btnAprifile.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				FileDialog fileDialog = new FileDialog(shell);
+				fileDialog.setFilterExtensions(new String[]{"*.txt", "*.csv", "*.*"}); //opzionale
+				String fileScelto = fileDialog.open();
+
+				if(fileScelto != null) {
+					MessageDialog.openInformation(shell, "File ", fileScelto);
+					MessageDialog.openInformation(shell, "File (solo nome)", fileDialog.getFileName());
+				}
+
+			}
+		});
+		btnAprifile.setBounds(10, 48, 75, 25);
+		btnAprifile.setText("Apri file");
 
 		stampa();
 
